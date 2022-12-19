@@ -1,43 +1,61 @@
-document.addEventListener("DOMContentLoaded", () => {
+let morpion = ["", "", "", "", "", "", "", "", ""]
 
-    let morpion = ["", "", "", "", "", "", "", "", ""]
-    
-    const winningPatterns = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ]
+const victory = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
 
-    //recuperer les cases du tableau html
 
-    
-    const playerOne = '╳';
-    const playerTwo = '◯';
-    let playerTurn = playerOne;
-    let gameStatus = document.getElementById("statutJeu")
-    let endGameStatus = gameStatus
-    const case0 = document.getElementById("case0")
-    const case1 = document.getElementById("case1")
-    const case2 = document.getElementById("case2")
-    const case3 = document.getElementById("case3")
-    const case4 = document.getElementById("case4")
-    const case5 = document.getElementById("case5")
-    const case6 = document.getElementById("case6")
-    const case7 = document.getElementById("case7")
-    const case8 = document.getElementById("case8")
-    
-    const statutJeu = document.getElementById("statutJeu")//Affichage de la victoire
-    const bouttons = Array.from(document.getElementsByTagName("button"))// conversion de la node list en tableau
-    //On va comparer CETTE LISTE à notre Array WINNIN PATTERNS
-    
-    //function cas de victoire
-    function isWinner() {
-    winningPatterns.forEach(casDeVictoire => {
+let turn = document.getElementById("turn");
+turn = 0
+const allCase = []
+
+const onClick = (item) => {
+    const index = item.getAttribute("id")
+    /*console.log("test")*/
+    if (turn === 0) {
+        morpion[index] = '╳';
+        item.innerText = '╳';
+        turn++
+    }
+    else if (turn >= 1) {
+        morpion[index] = '◯';
+        item.innerText = '◯';
+        turn--
+    }
+    isWinner()
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    let caseOne = document.getElementById('0');
+    let caseTwo = document.getElementById('1');
+    let caseThree = document.getElementById('2');
+    let caseFour = document.getElementById('3');
+    let caseFive = document.getElementById('4');
+    let caseSix = document.getElementById('5');
+    let caseSeven = document.getElementById('6');
+    let caseEight = document.getElementById('7');
+    let caseNine = document.getElementById('8');
+
+
+    allCase.push(caseOne, caseTwo, caseThree, caseFour, caseFive, caseSix, caseSeven, caseEight, caseNine)
+
+
+    allCase.forEach(function(item) {
+        item.addEventListener("click", () => onClick(item))
+    })
+
+
+});
+
+function isWinner() {
+    victory.forEach(casDeVictoire => {
         const indexNb1 = casDeVictoire[0]
         const indexNb2 = casDeVictoire[1]
         const indexNb3 = casDeVictoire[2]
@@ -51,61 +69,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 }
-    //Fonction pour les tours
-    let playGame = (e) => {
-        e.target.innerHTML = playerTurn;
-        playerTurn == playerOne ? playerTurn = playerTwo : playerTurn = playerOne;
-    }
-    
-    //parcourir les bouttons pour declencher le meme addeventlistener sur tous les bouttons
-    //On appelle la fonction qui permet d'ajouter une croix ou un rond
-    bouttons.forEach(function(item) {
-        item.addEventListener("click", playGame,{once: true})
-    })
-    
-    // Function qui parcourt le tableau 
-    //verifier que les cases ne sont pas vides
-    winningPatterns.forEach(possibility => {
-        if (possibility[0] === possibility[1] && possibility[1] === possibility[2]) { //fonction de comparaison de cas de victoire avec le tableau des données
-            alert('Vous avez gagné');
-        }
-    })
-
-
-    
-
-
-
-    //cas de victoire [[0,1,2], [3,4,5]]
-    // Btn
-    // function jeu gagnant
-    // function changer de joueur
-})
-
-////////////////PSEUDO CODE//////////////////////
-// but du morpion
-
-
-///////Depart//////
-
-
-
-//Commencer par le joueur 1 = croix
-//modifier le texte dans le boutton avec la croix, changer la valeur du boutton ?
-
-
-// ensuite joueur 2 = rond
-//modifier le texte dans le boutton avec le rond, changer la valeur du boutton ?
-
-
-
-//Creer une fonction qui voit si 3 elements sont collés et change la valeur de endGame en true : NOM : compareResultWithPatterns
-//endGame met fin à la partie et renvoi un message au vainqueur on l'appelle que en cas de victoire ou d'égalité
-
-
-
-
-// creer une fonction pour gerer les cas de victoire
-//Pour pouvoir comparer il faut comparer a un tableau avec touts les patterns de victoire possible
-// si 3 croix ou 3 ronds sont à la suite le joueur gagne
-// sinon egalité
