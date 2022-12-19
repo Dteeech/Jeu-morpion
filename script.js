@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         [1, 5, 9],
         [3, 5, 7]
     ]
+
+
+    let turn = 0
     const case0 = document.getElementById("case0")
     const case1 = document.getElementById("case1")
     const case2 = document.getElementById("case2")
@@ -31,14 +34,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const onClick = (e) => {
         alert("test")
+         if (turn === 0) {
+            e.innerText = 'X';
+            turn++
+        } else if (turn >= 1) {
+            e.innerText = 'O';
+            turn--
+        }
 
     }
 
-    bouttons.forEach(function(item){
-        onClick(item)
+    //ajout de la fonction onClick sur la boucle for each
+    bouttons.forEach(function(item) {
+        item.addEventListener("click", () => onClick(item))
     })
-    // bouttons.addEventListener("click", (e) => onClick(e))
-    bouttons.addEventListener("click", onClick())
+
+    // bouttons.addEventListener("click", (boucleBouttons) => onClick(boucleBouttons))
+
     //parcourir les bouttons pour declencher le meme addeventlistener sur tous les bouttons
 
 
