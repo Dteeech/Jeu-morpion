@@ -29,24 +29,30 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(bouttons)
     //function cas de victoire
     const victoryCases = () => {
-
+        
     }
 
-    const onClick = (e) => {
-        alert("test")
+    const allCases = (e) => {
          if (turn === 0) {
-            e.innerText = 'X';
+            e.innerText = '╳'
             turn++
         } else if (turn >= 1) {
-            e.innerText = 'O';
+            e.innerText = '◯';
             turn--
         }
 
     }
+    // Function qui parcourt le tableau 
+    //verifier que les cases ne sont pas vides
+    morpion.forEach(possibility => {
+        if (possibility[0] === possibility[1] && possibility[1] === possibility[2]) {
+            alert('Vous avez gagné');
+        }
+    })
 
-    //ajout de la fonction onClick sur la boucle for each
+    //ajout de la fonction allCases sur la boucle for each
     bouttons.forEach(function(item) {
-        item.addEventListener("click", () => onClick(item))
+        item.addEventListener("click", () => allCases(item))
     })
 
     // bouttons.addEventListener("click", (boucleBouttons) => onClick(boucleBouttons))
