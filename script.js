@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener("click", () => onClick(item))
     })
 
-
 });
 
 function isWinner() {
