@@ -1,19 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     //recuperer les cases du tableau html
-    const morpion = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
+    const winningPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
         [1, 4, 7],
         [2, 5, 8],
-        [3, 6, 9],
-        [1, 5, 9],
-        [3, 5, 7]
+        [0, 4, 8],
+        [2, 4, 6]
     ]
 
 
-    let turn = 0
+    let turn = 0;
+    const playerOne = '╳';
+    const playerTwo = '◯';
     const case0 = document.getElementById("case0")
     const case1 = document.getElementById("case1")
     const case2 = document.getElementById("case2")
@@ -28,41 +30,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(bouttons)
     //function cas de victoire
+
     const victoryCases = () => {
-        
+        //si 3 
     }
 
     const allCases = (e) => {
-         if (turn === 0) {
-            e.innerText = '╳'
+        if (turn === 0) {
+            e.innerText = playerOne
             turn++
-        } else if (turn >= 1) {
-            e.innerText = '◯';
+        }
+        else if (turn >= 1) {
+            e.innerText = playerTwo
             turn--
         }
 
-    }
+    }   
     // Function qui parcourt le tableau 
     //verifier que les cases ne sont pas vides
-    morpion.forEach(possibility => {
+    winningPatterns.forEach(possibility => {
         if (possibility[0] === possibility[1] && possibility[1] === possibility[2]) {
             alert('Vous avez gagné');
         }
     })
 
     //ajout de la fonction allCases sur la boucle for each
+    //parcourir les bouttons pour declencher le meme addeventlistener sur tous les bouttons
     bouttons.forEach(function(item) {
         item.addEventListener("click", () => allCases(item))
     })
 
-    // bouttons.addEventListener("click", (boucleBouttons) => onClick(boucleBouttons))
-
-    //parcourir les bouttons pour declencher le meme addeventlistener sur tous les bouttons
 
 
-    //onclick
-
-    //["","",""] => notre jeu
     //cas de victoire [[0,1,2], [3,4,5]]
     // Btn
     // function jeu gagnant
